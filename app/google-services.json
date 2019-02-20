@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "667013883867",
+    "firebase_url": "https://rawatonlineapp.firebaseio.com",
+    "project_id": "rawatonlineapp",
+    "storage_bucket": "rawatonlineapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667013883867:android:0398c1575965fd98",
+        "android_client_info": {
+          "package_name": "com.ro.rawatonline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667013883867-fknppaua4iae3cobm1e3ehg5bj94tgha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ro.rawatonline",
+            "certificate_hash": "660c1394409842e6965a6c5d03bb3640a1980b4c"
+          }
+        },
+        {
+          "client_id": "667013883867-b8bbg8coo680jncvp7u7fp2hbr60fde6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPvcrSJfJtl3ne7w8_COCfz4WswWLuNFA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667013883867-b8bbg8coo680jncvp7u7fp2hbr60fde6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
