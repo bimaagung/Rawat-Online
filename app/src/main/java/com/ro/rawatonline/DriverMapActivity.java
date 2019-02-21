@@ -41,6 +41,7 @@ public class DriverMapActivity<buildGoogleApiClient> extends FragmentActivity im
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
     @Override
