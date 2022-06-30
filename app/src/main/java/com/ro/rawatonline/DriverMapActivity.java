@@ -11,8 +11,8 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-//import com.firebase.geofire.GeoFire;
-//import com.firebase.geofire.GeoLocation;
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -75,11 +75,11 @@ public class DriverMapActivity<buildGoogleApiClient> extends FragmentActivity im
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
 
-        //String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        //DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driverAvailable");
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driverAvailable");
 
-        //GeoFire geoFire = new GeoFire(ref);
-        //geoFire.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLatitude()));
+        GeoFire geoFire = new GeoFire(ref);
+        geoFire.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLatitude()));
 
     }
 
@@ -107,17 +107,17 @@ public class DriverMapActivity<buildGoogleApiClient> extends FragmentActivity im
 
     }
 
-    /*
+
     @Override
     protected void onStop() {
         super.onStop();
 
-       // String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-       // DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driverAvailable");
+       String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+       DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driverAvailable");
 
-        //GeoFire geoFire = new GeoFire(ref);
-        //geoFire.removeLocation(userId);
+        GeoFire geoFire = new GeoFire(ref);
+        geoFire.removeLocation(userId);
     }
-    */
+
 }
 

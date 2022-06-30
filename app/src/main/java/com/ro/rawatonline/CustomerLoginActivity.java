@@ -14,32 +14,33 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class CustomerLoginActivity extends AppCompatActivity {
+import java.util.EventListener;
 
+public class CustomerLoginActivity extends AppCompatActivity {
     private EditText mEmail, mPassword;
     private Button mLogin, mRegistration;
 
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener firebaseAuthListner;
-
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_login);
-       // FirebaseApp.initializeApp(CustomerLoginActivity.this);
+        setContentView(R.layout.activity_driver_login);
+        // FirebaseApp.initializeApp(DriverLoginActivity.this);
+
         mAuth = FirebaseAuth.getInstance();
 
-        firebaseAuthListner = new FirebaseAuth.AuthStateListener() {
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null )
-                {
-                    Intent intent = new Intent(CustomerLoginActivity.this, DriverLoginActivity.class);
+                if(user!=null){
+                    Intent intent = new Intent(CustomerLoginActivity.this, DriverMapActivity.class);
                     startActivity(intent);
                     finish();
                     return;
@@ -61,12 +62,13 @@ public class CustomerLoginActivity extends AppCompatActivity {
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(CustomerLoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (!task.isSuccessful()){
-                            Toast.makeText(CustomerLoginActivity.this, "sig up error", Toast.LENGTH_SHORT).show();
+                        if(!task.isSuccessful()){
+                            Toast.makeText(CustomerLoginActivity.this, "sign up error", Toast.LENGTH_SHORT).show();
                         }else{
-                            String user_id =  mAuth.getCurrentUser().getUid();
-                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Customer").child(user_id);
+                            String user_id = mAuth.getCurrentUser().getUid();
+                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(user_id);
                             current_user_db.setValue(true);
+                            Toast.makeText(CustomerLoginActivity.this, "sign sukses", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -81,25 +83,25 @@ public class CustomerLoginActivity extends AppCompatActivity {
                 mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(CustomerLoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (!task.isSuccessful()){
+                        if(!task.isSuccessful()){
                             Toast.makeText(CustomerLoginActivity.this, "sign in error", Toast.LENGTH_SHORT).show();
-
                         }
                     }
                 });
+
             }
         });
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(firebaseAuthListner);
+        mAuth.addAuthStateListener(firebaseAuthListener);
     }
-
     @Override
     protected void onStop() {
         super.onStop();
-        mAuth.removeAuthStateListener(firebaseAuthListner);
+        mAuth.removeAuthStateListener(firebaseAuthListener);
     }
 }
